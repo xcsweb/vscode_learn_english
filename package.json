@@ -10,13 +10,21 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:extension.learnEnglish"
+		"onCommand:extension.learnEnglish",
+		"onCommand:extension.showEnglish",
+		"onCommand:extension.hideEnglish"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
 		"commands": [{
 			"command": "extension.learnEnglish",
 			"title": "learn english"
+		},{
+			"command": "extension.showEnglish",
+			"title": "show english"
+		},{
+			"command":"extension.hideEnglish",
+			"title":"hide english"
 		}]
 	},
 	"scripts": {
