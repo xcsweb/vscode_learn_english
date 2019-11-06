@@ -9,23 +9,82 @@
 	"categories": [
 		"Other"
 	],
+	"keywords": [
+		"学习"
+	],
 	"activationEvents": [
 		"onCommand:extension.learnEnglish",
 		"onCommand:extension.showEnglish",
-		"onCommand:extension.hideEnglish"
+		"onCommand:extension.displayCode",
+		"onCommand:extension.getNextPage"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
-		"commands": [{
-			"command": "extension.learnEnglish",
-			"title": "learn english"
-		},{
-			"command": "extension.showEnglish",
-			"title": "show english"
-		},{
-			"command":"extension.hideEnglish",
-			"title":"hide english"
-		}]
+		"configuration": {
+			"title": "Thief-Book",
+			"type": "object",
+			"properties": {
+				"thiefBook.currPageNumber": {
+					"type": "number",
+					"default": 1,
+					"description": "当前小说页数(支持跳转) & Pages of Current Novels (Support jumping)"
+				},
+				"thiefBook.pageSize": {
+					"type": "number",
+					"default": 50,
+					"description": "每页文字数量 & Number of text per page"
+				},
+				"thiefBook.isEnglish": {
+					"type": "boolean",
+					"default": false,
+					"description": "是否为英文书籍？ & Is it an English book？"
+				},
+				"thiefBook.lineBreak": {
+					"type": "string",
+					"default": " ",
+					"description": "换行分隔符号，默认一个空格 & Line Break Separation Symbol,Default a space"
+				},
+				"thiefBook.filePath": {
+					"type": "string",
+					"default": "",
+					"description": "TXT格式小说绝对路径 & Absolute Path of TXT Format Novels"
+				}
+			}
+		},
+		"commands": [
+			{
+				"command": "extension.learnEnglish",
+				"title": "learn english"
+			},
+			{
+				"command": "extension.showEnglish",
+				"title": "show english"
+			}
+		],
+		"keybindings": [
+			{
+				"command": "extension.getPreviousPage",
+				"key": "ctrl+alt+,",
+				"mac": "cmd+,",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.getNextPage",
+				"key": "ctrl+alt+.",
+				"mac": "cmd+.",
+				"when": "editorTextFocus"
+			},
+			{
+				"command": "extension.getJumpingPage",
+				"key": "ctrl+alt+;",
+				"mac": "cmd+;"
+			},
+			{
+				"command": "extension.displayCode",
+				"key": "ctrl+m",
+				"mac": "cmd+m"
+			}
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "yarn run compile",
@@ -38,11 +97,17 @@
 		"@types/glob": "^7.1.1",
 		"@types/mocha": "^5.2.6",
 		"@types/node": "^10.12.21",
+		"@types/superagent": "^4.1.4",
 		"@types/vscode": "^1.39.0",
 		"glob": "^7.1.4",
 		"mocha": "^6.1.4",
-		"typescript": "^3.3.1",
 		"tslint": "^5.12.1",
+		"typescript": "^3.3.1",
 		"vscode-test": "^1.0.2"
+	},
+	"dependencies": {
+		"@types/cheerio": "^0.22.13",
+		"cheerio": "^1.0.0-rc.3",
+		"superagent": "^5.1.0"
 	}
 }
